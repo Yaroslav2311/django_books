@@ -1,0 +1,11 @@
+[flake8]
+exclude =
+    .git,
+    __pycache__,
+    .venv,
+    manage.py,
+    migrations
+ignore =
+    A003
+
+max-line-length=245

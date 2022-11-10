@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+</head>
+<body>
+
+<h1>{{ obj }}</h1>
+<p> Number of pages: {{ obj.pages }}</p>
+<p>Price $ : {{ obj.price }}</p>
+<p>Publisher : {{ obj.publisher }}</p>
+<p>Authors: {{ obj.authors.all|join:', ' }}</p>
+<h4><a href="/books/book">list of all books</a> </h4>
+</body>
+</html>

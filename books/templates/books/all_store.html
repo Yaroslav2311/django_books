@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All store</title>
+</head>
+<body>
+{% for i in obj %}
+<h4> <a href="/books/store/{{ i.id }}"> {{ i.name }} </a> </h4>
+<p>{{ i.books.all|join:', ' }}</p>
+    <p>{{ i.books.price}}</p>
+
+{% endfor %}
+</body>
+</html>

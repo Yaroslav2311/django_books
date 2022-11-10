@@ -1,0 +1,13 @@
+language: python
+python:
+  - "3.9"
+env:
+  - SECRET_KEY = os.environ.get("SECRET_KEY")
+install:
+  - pip install -r requirements.txt
+before_script:
+  - python manage.py migrate
+script:
+  - flake8 .
+  - python manage.py test
+

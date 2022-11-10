@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Publisher</title>
+</head>
+<body>
+<h1>{{ obj }}</h1>
+<p> {{ obj.name}}</p>
+{% for i in obj.book_set.all %}
+<p>{{ i.name}}</p>
+    <p>{{ i.pubdate }}</p>
+{% endfor %}
+
+<h4><a href="/books/publisher">list of all publishers</a> </h4>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>all publisher</title>
+</head>
+<body>
+{% for i in obj %}
+<h4> <a href="/books/publisher/{{ i.id }}"> {{ i.name }} </a> </h4>
+    <h4>number of published books: {{ i.num_book }}</h4>
+{% for a in i.book_set.all %}
+    <p>{{ a.name }}</p>
+{% endfor %}
+{% endfor %}
+</body>
+</html>

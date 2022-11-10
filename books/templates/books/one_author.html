@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Author</title>
+</head>
+<body>
+<h1>{{ obj }}</h1>
+{% for i in obj.book_set.all %}
+<p>{{ i.name }}</p>
+{% endfor %}
+
+<h4><a href="/books/author">list of all authors</a> </h4>
+</body>
+</html>

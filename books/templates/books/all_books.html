@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All books</title>
+</head>
+<body>
+ <table border="3">
+        <tr>
+        <td width="150">Book</td>
+        <td width="60">pages</td>
+        <td width="60">price</td>
+        <td width="100">rating</td>
+            <td width="80">publisher</td>
+            <td width="100">authors</td>
+        </tr>
+    </table>
+{% for i in all_book %}
+    <table border="2">
+        <tr>
+        <td width="150"><a href="/books/book/{{ i.id }}"> {{ i.name }}</a> </td>
+        <td width="60">{{ i.pages }}</td>
+        <td width="60">{{ i.price }}</td>
+        <td width="100">{{ i.rating }}</td>
+            <td width="80">{{ i.publisher.name }}</td>
+            <td width="100">{{  i.authors.all|join:", " }}</td>
+
+
+        </tr>
+    </table>
+{% endfor %}
+<p>maximum price: {{ max_price }}</p>
+<p>average rating: {{ avg_rat }}</p>
+</body>
+</html>
