@@ -3,6 +3,8 @@ exclude =
     .git,
     __pycache__,
     .venv,
+    ./venv
+
     manage.py,
     migrations
 ignore =
