@@ -28,7 +28,6 @@ def create_note():
         soup = BeautifulSoup(response.text, 'html.parser')
         for x in soup.find_all('div', class_='quote'):
             if len(phrase_list) < 5:
-                # if x.find('span', class_='text').text not in phrases_in_db:
                 try:
                     Phrases.objects.get(phrase=x.find('span', class_='text').text)
                 except Exception:
