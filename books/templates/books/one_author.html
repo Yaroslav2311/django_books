@@ -5,8 +5,8 @@
     <title>Author</title>
 </head>
 <body>
-<h1>{{ obj }}</h1>
-{% for i in obj.book_set.all %}
+<h1>{{ context }}</h1>
+{% for i in context.book_set.all %}
 <p>{{ i.name }}</p>
 {% endfor %}
 

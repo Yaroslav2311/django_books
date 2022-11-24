@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Author</title>
+</head>
+<body>
+<form action="{% url 'books:add_author' %}" method="post">
+{% csrf_token %}
+
+{{ form }}
+<input type="submit" name="add">
+</form>
+</body>
+</html>
