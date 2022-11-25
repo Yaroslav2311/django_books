@@ -1,23 +1,34 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Avg, Count, Max
 from django.shortcuts import get_object_or_404
+# from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from .models import Author, Book, Publisher, Store
 
 
+@cache_page(30)
 def all_books(request):
+    # all_book = Book.objects.all()
     all_book = Book.objects.select_related('publisher').all()
     max_price = Book.objects.aggregate(Max('price'))['price__max']
     avg_rat = Book.objects.aggregate(Avg('rating'))['rating__avg']
     return render(request, 'books/all_books.html', {'all_book': all_book, 'max_price': max_price, 'avg_rat': avg_rat})
-
+    # paginator = Paginator(all_book, 50)
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
+    # return render(request, 'books/all_books.html', {'page_obj': page_obj}) # 'all_book': all_book, 'max_price': max_price, 'avg_rat': avg_rat})
 
 # def all_author(request):
 #     all_authors = Author.objects.prefetch_related('book_set__authors').all()
 #     return render(request, 'books/all_author.html', {'all_authors': all_authors})
+
+
+@method_decorator(cache_page(30), name='dispatch')
 class AllAuthor(ListView):
     model = Author
     template_name = 'books/all_author.html'
@@ -39,9 +50,11 @@ class UpdateAuthor(LoginRequiredMixin, UpdateView):
     model = Author
     fields = ['name', 'age']
     template_name = 'books/update_author.html'
-    # pk_url_kwarg = 'pk'
-    # success_url = reverse_lazy('books:author', kwargs={'pk': pk_url_kwarg})
+    pk_url_kwarg = 'pk'
+    # success_url = reverse_lazy('books:author', kwargs={pk_url_kwarg: 'pk'})
     success_url = reverse_lazy('books:all_author')
+    # def get_success_url(self, pk):
+    #     return reverse_lazy('books:author', kwargs={'pk': self.kwargs['pk']})
 
 
 class DelAuthor(LoginRequiredMixin, DeleteView):

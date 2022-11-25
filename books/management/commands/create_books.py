@@ -10,16 +10,16 @@ from faker import Faker
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        Publisher.objects.all().delete()
-        Book.objects.all().delete()
-        Store.objects.all().delete()
-        Author.objects.all().delete()
+        # Publisher.objects.all().delete()
+        # Book.objects.all().delete()
+        # Store.objects.all().delete()
+        # Author.objects.all().delete()
 
         publishers = [Publisher(name=f"Publisher{index}") for index in range(1, 6)]
         Publisher.objects.bulk_create(publishers)
 
         authors = []
-        for i in range(1, 11):
+        for i in range(1, 50):
             authors.append(Author(name=f'Author{i}', age=random.randint(30, 75)))
         Author.objects.bulk_create(authors)
 
@@ -27,7 +27,7 @@ class Command(BaseCommand):
         counter = 0
         books = []
         for publisher in Publisher.objects.all():
-            for i in range(20):
+            for i in range(60):
                 counter = counter + 1
                 book_one = Book(name=f"Book{counter}", price=random.randint(50, 700), pages=random.randint(190, 1200), rating=round(random.uniform(3, 5), 3), publisher=publisher, pubdate=fake.date_time_between(start_date='-30y', end_date='now'))
                 book_one.save()
