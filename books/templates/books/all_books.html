@@ -6,64 +6,53 @@
 </head>
 <body>
 
-
-    <table border="3">
-            <tr>
-             <td width="150">Book</td>
-             <td width="60">pages</td>
-             <td width="60">price</td>
-             <td width="100">rating</td>
-             <td width="80">publisher</td>
-             <td width="100">authors</td>
-            </tr>
-        </table>
- {% for i in all_book %}
+<table border="3">
+    <tr>
+        <td width="150">Book</td>
+        <td width="60">pages</td>
+        <td width="60">price</td>
+        <td width="100">rating</td>
+        <td width="80">publisher</td>
+        <td width="100">authors</td>
+    </tr>
+</table>
+{% for i in all_book %}
         <table border="2">
            <tr>
-            <td width="150"><a href="/books/book/{{ i.id }}"> {{ i.name }}</a> </td>
-            <td width="60">{{ i.pages }}</td>
-            <td width="60">{{ i.price }}</td>
-            <td width="100">{{ i.rating }}</td>
-            <td width="80">{{ i.publisher.name }}</td>
-            <td width="100">{{  i.authors.all|join:", " }}</td>
+                <td width="150"><a href="/books/book/{{ i.id }}"> {{ i.name }}</a> </td>
+                <td width="60">{{ i.pages }}</td>
+                <td width="60">{{ i.price }}</td>
+                <td width="100">{{ i.rating }}</td>
+                <td width="80">{{ i.publisher.name }}</td>
+                <td width="100">{{  i.authors.all|join:", " }}</td>
            </tr>
-    </table>
-  {% endfor %}
+        </table>
+{% endfor %}
+
+<p>{{ max_price }}</p>
+<p>{{ avg_rat }}</p>
+<!--    <p><a href="/books/book/{{ i.id }}"> {{ i.name }}</a> number of pages: {{ i.pages }} rating: {{ i.rating }} : {{ i.publisher.name }}  || {{  i.authors.all|join:", " }}</p>-->
+<!--     <p> </p>-->
+<!--     <p></p>-->
 
 
-<!--    <p><a href="/books/book/{{ i.id }}"> {{ i.name }}</a> </p>-->
-<!--     <p> {{ i.pages }}</p>-->
-<!--    <p>{{ i.price }}</p>-->
-<!--    <p>{{ i.rating }}</p>-->
-<!--    <p></p>-->
+{% block pagination %}
+        {% if is_paginated %}
+          <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                  <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+              <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+              {% if page_obj.has_next %}
+                <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+              {% endif %}
+            </span>
+          </div>
+        {% endif %}
+      {% endblock %}
 
-<p>maximum price: {{ max_price }}</p>
-<p>average rating: {{ avg_rat }}</p>
-<!--<p>{{ page_obj }}</p>-->
-<!--<p>{{ book_object }}</p>-->
-
-<!-- <p>{{ object_list }}</p>-->
-<!-- <p>{{ is_paginated }}</p>-->
-<!-- <p>{{ paginator }}</p>-->
-
-<!--&lt;!&ndash; <p></p>&ndash;&gt;-->
-
-<!--<div class="pagination">-->
-<!--    <span class="step-links">-->
-<!--        {% if page_obj.has_previous %}-->
-<!--            <a href="?page=1">&laquo; first</a>-->
-<!--            <a href="?page={{ page_obj.previous_page_number }}">previous</a>-->
-<!--        {% endif %}-->
-
-<!--        <span class="current">-->
-<!--            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.-->
-<!--        </span>-->
-
-<!--        {% if page_obj.has_next %}-->
-<!--            <a href="?page={{ page_obj.next_page_number }}">next</a>-->
-<!--            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>-->
-<!--        {% endif %}-->
-<!--    </span>-->
-<!--</div>-->
 </body>
 </html>
